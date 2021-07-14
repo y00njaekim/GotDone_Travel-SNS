@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/android-maps-utils.iml" filepath="$PROJECT_DIR$/.idea/modules/android-maps-utils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/demo/android-maps-utils.demo.iml" filepath="$PROJECT_DIR$/.idea/modules/demo/android-maps-utils.demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/library/android-maps-utils.library.iml" filepath="$PROJECT_DIR$/.idea/modules/library/android-maps-utils.library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/library-v3/android-maps-utils.library-v3.iml" filepath="$PROJECT_DIR$/.idea/modules/library-v3/android-maps-utils.library-v3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lint-checks/android-maps-utils.lint-checks.iml" filepath="$PROJECT_DIR$/.idea/modules/lint-checks/android-maps-utils.lint-checks.iml" />
+    </modules>
+  </component>
+</project>

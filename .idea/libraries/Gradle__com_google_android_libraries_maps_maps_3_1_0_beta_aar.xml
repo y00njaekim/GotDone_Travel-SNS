@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Gradle: com.google.android.libraries.maps:maps:3.1.0-beta@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/78a1741fa90c69dbe456484811a87b7b/jetified-maps-3.1.0-beta/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/78a1741fa90c69dbe456484811a87b7b/jetified-maps-3.1.0-beta/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/78a1741fa90c69dbe456484811a87b7b/jetified-maps-3.1.0-beta/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/763014ab3313cfc6293492ab5cfd1d7f/jetified-maps-3.1.0-beta/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/763014ab3313cfc6293492ab5cfd1d7f/jetified-maps-3.1.0-beta/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/763014ab3313cfc6293492ab5cfd1d7f/jetified-maps-3.1.0-beta/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
