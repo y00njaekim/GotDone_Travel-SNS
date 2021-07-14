@@ -25,6 +25,7 @@
 
 ## 로그인/회원가입
 <img src = "./image/2.jpg" width="30%">
+
 >  Backend
    + MongoDB에 Login collection을 만듬.
    + 회원가입 시 Login collection에 id, password, name을 저장함. 이때, id는 DB에 존재하는 id들과 중복되지 않아야 함.  
@@ -33,6 +34,7 @@
 
 ## 메인 화면
 <img src = "./image/3.jpg" width="30%"> <img src = "./image/4.jpg" width="30%">
+
 >  Frontend
    + Google Map API
    + HeatMap  
@@ -47,6 +49,7 @@
 
 ## 자신의 여행들 / 공유된 여행들
 <img src = "./image/5.jpg" width="30%"> <img src = "./image/6.jpg" width="30%">
+
 >  Frontend 
    + Gridview를 이용하여 여행 이름, 여행 날짜, 여행을 간 사람들의 아이디들을 보여줌.
    + Google Map API HeatMap을 이용함.  
@@ -61,21 +64,22 @@
 
 >  여행 추가
 <img src = "./image/7.jpg" width="30%">
->   + 새로운 여행을 추가 시 Travel collection에 여행 이름, 여행 날짜, 여행에 참가한 사람들의 아이디를 저장하도록 함.
->   + 이때, 여행 이름과 여행 날짜는 반드시 입력해야 하며, 친구들의 아이디는 DB에 존재하는 아이디이어야 함.
-> 
+
+   + 새로운 여행을 추가 시 Travel collection에 여행 이름, 여행 날짜, 여행에 참가한 사람들의 아이디를 저장하도록 함.
+   + 이때, 여행 이름과 여행 날짜는 반드시 입력해야 하며, 친구들의 아이디는 DB에 존재하는 아이디이어야 함.
+ 
 >  여행 수정
->   + 여행을 수정 시 사용자가 전에 입력했던 정보를 띄워주며 원하는 정보를 수정할 수 있도록 함.
->   + DB의 collection도 수정된 정보를 update시켜줌.
-> 
+   + 여행을 수정 시 사용자가 전에 입력했던 정보를 띄워주며 원하는 정보를 수정할 수 있도록 함.
+   + DB의 collection도 수정된 정보를 update시켜줌.
+ 
 >  여행 삭제
->   + 여행을 삭제 시 DB의 collection에서 해당 document를 삭제함.
-> 
+   + 여행을 삭제 시 DB의 collection에서 해당 document를 삭제함.
+ 
 >  여행 공유 & 좋아요
->   + 공유한 여행은 해당 여행을 함께 간 사람들 뿐 아니라 앱을 사용하는 모든 사람들이 볼 수 있음.
->   + 공유한 여행들에는 좋아요를 눌러 호응할 수 있으며, 한 여행 당 최대 1번 누를 수 있음.
->   + 공유된 여행은 좋아요 순, 최신 순 2가지로 정렬해 볼 수 있음.
-> 
+   + 공유한 여행은 해당 여행을 함께 간 사람들 뿐 아니라 앱을 사용하는 모든 사람들이 볼 수 있음.
+   + 공유한 여행들에는 좋아요를 눌러 호응할 수 있으며, 한 여행 당 최대 1번 누를 수 있음.
+   + 공유된 여행은 좋아요 순, 최신 순 2가지로 정렬해 볼 수 있음.
+ 
 >  여행 경로 표시
 > 
 >  마커 표시
@@ -83,6 +87,7 @@
 
 ## 채팅
 <img src = "./image/8.jpg" width="30%">
+
 >  Frontend
    + RecyclerView를 이용하여 채팅들을 화면에 띄움.
 >  Backend
