@@ -7,7 +7,7 @@
 --------------------------------------------
 
 ## Summary
-![screenshot](./image/1.jpg){: width="100" height="200"}
+<img src="./image/1.jpg", width="200">
 > ### 여행을 기록하고, 공유하며, 함께 여행을 간 친구들과 소통할 수 있는 여행 SNS  
 + Frontend: Android studio에서 Java언어로 개발  
 + Backend: VScode에서 Javascript언어로 개발. NodeJS, Socket.io, MongoDB를 이용함  
