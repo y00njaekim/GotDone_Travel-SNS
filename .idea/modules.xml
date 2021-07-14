@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/android-maps-utils.iml" filepath="$PROJECT_DIR$/.idea/modules/android-maps-utils.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/demo/android-maps-utils.demo.iml" filepath="$PROJECT_DIR$/.idea/modules/demo/android-maps-utils.demo.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/library/android-maps-utils.library.iml" filepath="$PROJECT_DIR$/.idea/modules/library/android-maps-utils.library.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/library-v3/android-maps-utils.library-v3.iml" filepath="$PROJECT_DIR$/.idea/modules/library-v3/android-maps-utils.library-v3.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lint-checks/android-maps-utils.lint-checks.iml" filepath="$PROJECT_DIR$/.idea/modules/lint-checks/android-maps-utils.lint-checks.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MadCamp-Second-Project.iml" filepath="$PROJECT_DIR$/.idea/modules/MadCamp-Second-Project.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/demo/MadCamp-Second-Project.demo.iml" filepath="$PROJECT_DIR$/.idea/modules/demo/MadCamp-Second-Project.demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/library/MadCamp-Second-Project.library.iml" filepath="$PROJECT_DIR$/.idea/modules/library/MadCamp-Second-Project.library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/library-v3/MadCamp-Second-Project.library-v3.iml" filepath="$PROJECT_DIR$/.idea/modules/library-v3/MadCamp-Second-Project.library-v3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lint-checks/MadCamp-Second-Project.lint-checks.iml" filepath="$PROJECT_DIR$/.idea/modules/lint-checks/MadCamp-Second-Project.lint-checks.iml" />
     </modules>
   </component>
 </project>

@@ -43,7 +43,6 @@ import com.google.android.gms.maps.model.GroundOverlay;
 import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
-import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.TileOverlay;
@@ -75,7 +74,7 @@ public class MapActivity extends AppCompatActivity
     TextView textView;
     String coordinates, curr_id, cpns, journey_name;
 
-    FloatingActionButton fbtn_add, fbtn_flag, fbtn_chat, fbtn_recording;
+    FloatingActionButton fbtn_chat, fbtn_recording;
     Animation fromBottom, toBottom, rotateOpen, rotateClose;
     Boolean add_clicked = false;
     Boolean start_clicked = false;
@@ -175,15 +174,12 @@ public class MapActivity extends AppCompatActivity
     // [END maps_current_place_state_keys]
 
     String shared;
-    List<String> dCoordinates;
-    List<String> dLat;
-    List<String> dLng;
-    LatLng initLL;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+
 
         Intent intent = getIntent();
         shared = intent.getExtras().getString("shared");
@@ -198,27 +194,16 @@ public class MapActivity extends AppCompatActivity
         rotateOpen = AnimationUtils.loadAnimation(MapActivity.this, R.anim.rotate_open_anim);
         rotateClose = AnimationUtils.loadAnimation(MapActivity.this, R.anim.rotate_close_anim);
 
-        fbtn_add = findViewById(R.id.fbtn_add);
         fbtn_chat = findViewById(R.id.fbtn_chat);
-        fbtn_flag = findViewById(R.id.fbtn_flag);
         fbtn_recording = findViewById(R.id.fbtn_start);
 
         if(shared.equals("all")){
-            fbtn_add.setVisibility(View.GONE);
+            fbtn_chat.setVisibility(View.GONE);
             fbtn_recording.setVisibility(View.GONE);
         }
 
-        fbtn_add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setVisibility(add_clicked, v);
-                setAnimation(add_clicked);
-                add_clicked = !add_clicked;
-                get_coordinates(journey_name, cpns);
-            }
-        });
 
-        // 마커 넣기. 
+        // 마커 넣기.
         fbtn_recording.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -281,8 +266,96 @@ public class MapActivity extends AppCompatActivity
         setUpMap();
     }
 
+    private void save_markers(String journey_name, String cpns, String address, String lat, String lng){
+        HashMap<String, String> map = new HashMap<>();
+        map.put("journey_name", journey_name);
+
+        map.put("id", cpns);
+
+        map.put("address", address);
+
+        map.put("lat", lat);
+
+        map.put("lng", lng);
+
+        Call<Void> call = LoginActivity.retrofitInterface.saveMarkers(map);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.code() == 200) {
+                    Toast.makeText(getApplicationContext(), "success", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void get_markers(String journey_name, String cpns){
+        HashMap<String, String> map = new HashMap<>();
+        map.put("journey_name", journey_name);
+
+        map.put("id", cpns);
+
+        Call<List<MarkerResult>> call = LoginActivity.retrofitInterface.getMarkers(map);
+
+        call.enqueue(new Callback<List<MarkerResult>>() {
+            @Override
+            public void onResponse(Call<List<MarkerResult>> call, Response<List<MarkerResult>> response) {
+                if (response.code() == 200) {
+                    List<MarkerResult> result = response.body();
+                    for(int i = 0; i<result.size(); i++){
+                        String address = result.get(i).getAddress();
+                        String lat = result.get(i).getMarkerLat();
+                        String lng = result.get(i).getMarkerLng();
+                        LatLng latLng = new LatLng(Double.parseDouble(lat), Double.parseDouble(lng));
+                        mMap.addMarker(new MarkerOptions().position(latLng).title(address).draggable(true));
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<MarkerResult>> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void update_marker(String journey_name, String cpns, String address, String lat, String lng){
+        HashMap<String, String> map = new HashMap<>();
+        map.put("journey_name", journey_name);
+
+        map.put("id", cpns);
+
+        map.put("address", address);
+
+        map.put("lat", lat);
+
+        map.put("lng", lng);
+
+        Call<Void> call = LoginActivity.retrofitInterface.updateMarkers(map);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.code() == 200) {
+                    Toast.makeText(getApplicationContext(), "updated", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
     private void get_coordinates(String journey_name, String cpns){
-        Log.d("yjyj", "MapActivity.java, get_coordinates");
         HashMap<String, List<String>> map = new HashMap<>();
         ArrayList<String> arrayList1 = new ArrayList<>();
         arrayList1.add(journey_name);
@@ -300,17 +373,52 @@ public class MapActivity extends AppCompatActivity
         call.enqueue(new Callback<CoordResult>() {
             @Override
             public void onResponse(Call<CoordResult> call, Response<CoordResult> response) {
+                Log.d("asdfasdf", "yes");
                 if (response.code() == 200) {
-                    Log.d("yjyj", "MapActivity.java, onResponse");
+                    Log.d("asdfasdf", "yes2");
                     CoordResult result = response.body();
-                    dCoordinates = result.getCoordinates();
-                    Log.d("yjyj", "MapActivity.java, onResponse " + dCoordinates.size());
-                    dLat = result.getLat();
-                    Log.d("yjyj", "MapActivity.java, onResponse " + dLat.size());
-                    dLng = result.getLng();
-                    Log.d("yjyj", "MapActivity.java, onResponse " + dLng.size());
+                    List<String> coordinates = result.getCoordinates();
+                    List<String> lat = result.getLat();
+                    List<String> lng = result.getLng();
+                    Log.d("asdfasdf", "yes3");
 
-                    Toast.makeText(getApplicationContext(), "got coordinates", Toast.LENGTH_SHORT).show();
+                    for(int j=1; j<coordinates.size(); j++){
+                        Log.d("asdfasdf", coordinates.get(j));
+                    }
+
+                    LatLng initLL = new LatLng(Double.parseDouble(coordinates.get(0)), Double.parseDouble(coordinates.get(1)));
+                    // 카메라 초기 위치
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(initLL, 17));
+
+                    Log.d("asdfasdf", result.getLat().get(0));
+                    if(lat.size() != 1){
+                        for(int i=0; i<lat.size(); i++){
+                            Log.d("asdfasdf", "in for loop");
+
+                            Double tempLat = Double.parseDouble(lat.get(i));
+                            Double tempLng = Double.parseDouble(lng.get(i));
+                            LatLng tempLL = new LatLng(tempLat, tempLng);
+                            heatMap.add(tempLL);
+                            if (mProvider == null) {
+                                mProvider = new HeatmapTileProvider.Builder().data(heatMap).build(); //data(ArrayList<LatLng>).build();
+                                mOverlay = getMap().addTileOverlay(new TileOverlayOptions().tileProvider(mProvider));
+                            } else {
+                                mProvider.setData(heatMap);
+                                mOverlay.clearTileCache();
+                            }
+
+                            if (mDefaultRadius) {
+                                mProvider.setRadius(ALT_HEATMAP_RADIUS);
+                            }
+                            if (mDefaultGradient) {
+                                mProvider.setGradient(ALT_HEATMAP_GRADIENT);
+                            }
+                            if (mDefaultOpacity) {
+                                mProvider.setOpacity(ALT_HEATMAP_OPACITY);
+                            }
+                        }
+                    }
+
                 }
             }
 
@@ -348,7 +456,7 @@ public class MapActivity extends AppCompatActivity
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.code() == 200) {
-                    Toast.makeText(getApplicationContext(), "your journey is updated", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "your journey is updated", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -358,30 +466,6 @@ public class MapActivity extends AppCompatActivity
             }
         });
 
-    }
-
-    private void setVisibility(Boolean clicked, View view){
-        if(!clicked){
-            fbtn_chat.setVisibility(view.VISIBLE);
-            fbtn_flag.setVisibility(view.VISIBLE);
-        }
-        else{
-            fbtn_chat.setVisibility(view.INVISIBLE);
-            fbtn_flag.setVisibility(view.INVISIBLE);
-        }
-    }
-
-    private void setAnimation(Boolean clicked) {
-        if(!clicked){
-            fbtn_add.startAnimation(rotateOpen);
-            fbtn_chat.startAnimation(fromBottom);
-            fbtn_flag.startAnimation(fromBottom);
-        }
-        else{
-            fbtn_add.startAnimation(rotateClose);
-            fbtn_chat.startAnimation(toBottom);
-            fbtn_flag.startAnimation(toBottom);
-        }
     }
 
     // [START maps_current_place_on_save_instance_state]
@@ -398,35 +482,23 @@ public class MapActivity extends AppCompatActivity
 
     @Override
     public void onMapReady(GoogleMap map) {
-
         count = 0;
-        get_coordinates(journey_name, cpns);
-        initLL = new LatLng(Double.parseDouble(dCoordinates.get(0)), Double.parseDouble(dCoordinates.get(1)));
-
-        Double tempLat;
-        Double tempLng;
-        LatLng tempLL;
-        heatMap.clear();
-        if(dLat != null && dLng != null) {
-            for (int i = 0; i < dLat.size(); i++) {
-                tempLat = Double.parseDouble(dLat.get(i));
-                tempLng = Double.parseDouble(dLng.get(i));
-                tempLL = new LatLng(tempLat, tempLng);
-                heatMap.add(tempLL);
-            }
-        }
-
         Log.d("yjyj", "MainActivity.java, onMapReady");
         if (mMap != null) {
             return;
         } else mMap = map;
         mMap.setMyLocationEnabled(true);
 
+        heatMap.clear();
+        get_coordinates(journey_name, cpns);
+
+        get_markers(journey_name, cpns);
+
         // 최소 줌
         mMap.setMinZoomPreference(7.0f);
 
-        // 카메라 초기 위치
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(initLL, 9));
+//        // 카메라 초기 위치
+//        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(initLL, 17));
 
         // 카메라 바운드, 한계 테두리 설정
         LatLngBounds Bounds = new LatLngBounds(
@@ -509,6 +581,9 @@ public class MapActivity extends AppCompatActivity
                                 }
                             }
                         }
+
+                        save_markers(journey_name, cpns, address, Double.toString(latLng.latitude), Double.toString(latLng.longitude));
+
                     } catch (Exception e) {}
                     mMap.addMarker(new MarkerOptions().position(latLng).title(address).draggable(true));
                     CameraUpdate loc = CameraUpdateFactory.newLatLngZoom(latLng, mMap.getCameraPosition().zoom);
@@ -516,8 +591,10 @@ public class MapActivity extends AppCompatActivity
                 }
             }
         });
-
     }
+
+
+
 
     /**
      * Helper class - stores data sets and sources.
@@ -755,11 +832,11 @@ public class MapActivity extends AppCompatActivity
         Log.d("yjyj", "MainActivity.java, setCurrentLocation");
         if (currentMarker != null) currentMarker.remove();
         LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
-//        if(count == 0) {
-//            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(currentLatLng);
-//            mMap.moveCamera(cameraUpdate);
-//        }
-//        count++;
+        if(count == 0) {
+            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(currentLatLng);
+            mMap.moveCamera(cameraUpdate);
+        }
+        count++;
     }
 
 

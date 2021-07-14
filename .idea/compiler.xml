@@ -5,6 +5,9 @@
       <module name="android-maps-utils.demo" target="11" />
       <module name="android-maps-utils.library" target="11" />
       <module name="android-maps-utils.library-v3" target="11" />
+      <module name="MadCamp-Second-Project.demo" target="11" />
+      <module name="MadCamp-Second-Project.library" target="11" />
+      <module name="MadCamp-Second-Project.library-v3" target="11" />
       <module name="MADCAMP_2.demo" target="11" />
       <module name="MADCAMP_2.library" target="11" />
       <module name="MADCAMP_2.library-v3" target="11" />

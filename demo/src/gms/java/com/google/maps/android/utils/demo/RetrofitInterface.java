@@ -46,5 +46,17 @@ public interface RetrofitInterface {
     @POST("/getcoordinates")
     Call<CoordResult> getCoordinates(@Body HashMap<String, List<String>> map);
 
+    @POST("/getallcoordinates")
+    Call<List<CoordResult>> getAllCoordinates (@Body HashMap<String, String> map);
+
+    @POST("/savemarkers")
+    Call<Void> saveMarkers(@Body HashMap<String, String> map);
+
+    @POST("/getmarkers")
+    Call<List<MarkerResult>> getMarkers(@Body HashMap<String, String> map);
+
+    @POST("/updatemarkers")
+    Call<Void> updateMarkers(@Body HashMap<String, String> map);
+
 
 }
