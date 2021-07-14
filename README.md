@@ -7,7 +7,7 @@
 --------------------------------------------
 
 ## Summary
-![screenshot](./image/1.jpg)
+![screenshot](./image/1.jpg){: width="30%" height="30%"}
 > ### 여행을 기록하고, 공유하며, 함께 여행을 간 친구들과 소통할 수 있는 여행 SNS  
 + Frontend: Android studio에서 Java언어로 개발  
 + Backend: VScode에서 Javascript언어로 개발. NodeJS, Socket.io, MongoDB를 이용함  
@@ -23,7 +23,7 @@
 --------------------------------------------
 
 ## 로그인/회원가입
-![screenshot](./image/2.jpg)
+![screenshot](./image/2.jpg){: width="30%" height="30%"}
 >  Backend
    + MongoDB에 Login collection을 만듬.
    + 회원가입 시 Login collection에 id, password, name을 저장함. 이때, id는 DB에 존재하는 id들과 중복되지 않아야 함.  
@@ -31,7 +31,7 @@
 
 
 ## 메인 화면
-![screenshot](./image/3.jpg) ![screenshot](./image/4.jpg)
+![screenshot](./image/3.jpg){: width="30%" height="30%"} ![screenshot](./image/4.jpg){: width="30%" height="30%"}
 >  Frontend
    + Google Map API
    + HeatMap  
@@ -45,7 +45,7 @@
 
 
 ## 자신의 여행들 / 공유된 여행들
-![screenshot](./image/5.jpg) ![screenshot](./image/6.jpg)
+![screenshot](./image/5.jpg){: width="30%" height="30%"} ![screenshot](./image/6.jpg){: width="30%" height="30%"}
 >  Frontend 
    + Gridview를 이용하여 여행 이름, 여행 날짜, 여행을 간 사람들의 아이디들을 보여줌.
    + Google Map API HeatMap을 이용함.  
@@ -59,7 +59,7 @@
    + 지도 위에 마커를 표시할 수 있음.
 
 >  여행 추가
-![screenshot](./image/7.jpg)
+![screenshot](./image/7.jpg){: width="30%" height="30%"}
 >   + 새로운 여행을 추가 시 Travel collection에 여행 이름, 여행 날짜, 여행에 참가한 사람들의 아이디를 저장하도록 함.
 >   + 이때, 여행 이름과 여행 날짜는 반드시 입력해야 하며, 친구들의 아이디는 DB에 존재하는 아이디이어야 함.
 > 
@@ -81,7 +81,7 @@
 
 
 ## 채팅
-![screenshot](./image/8.jpg)
+![screenshot](./image/8.jpg){: width="30%" height="30%"}
 >  Frontend
    + RecyclerView를 이용하여 채팅들을 화면에 띄움.
 >  Backend
